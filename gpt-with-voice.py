@@ -1,13 +1,12 @@
-"YOUR_OPENAI_API_KEY"
-"k-UxTWmusjUfNjcz3Obb6UT3BlbkFJXT3wjMvAblpdbWbwgGvd"
-
-
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 import speech_recognition as sr
 from gtts import gTTS
 import os
 
 # Set your OpenAI API key here
-openai_api_key = "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"
+openai_api_key = "YOUR_OPENAI_API_KEY"
 
 # Function to generate text using OpenAI GPT API
 def generate_text(prompt):
@@ -21,6 +20,19 @@ def text_to_speech(text, filename="output.mp3"):
     tts = gTTS(text=text, lang="en")
     tts.save(filename)
     os.system("start " + filename)  # Opens the generated speech using the default media player
+
+# Function to preprocess user input using nltk
+def preprocess_text(user_input):
+    # Tokenize the input
+    words = word_tokenize(user_input)
+
+    # Remove stop words
+    stop_words = set(stopwords.words("english"))
+    filtered_words = [word for word in words if word.lower() not in stop_words]
+
+    # Reconstruct the sentence
+    processed_input = " ".join(filtered_words)
+    return processed_input
 
 # Function to listen to user's voice
 def listen():
@@ -48,8 +60,11 @@ while True:
         print("Exiting...")
         break
 
+    # Preprocess user input
+    processed_input = preprocess_text(user_input)
+
     # Call OpenAI GPT API to generate response
-    ai_response = generate_text(user_input)
+    ai_response = generate_text(processed_input)
 
     # Convert AI-generated text to speech and play it
     text_to_speech(ai_response)
