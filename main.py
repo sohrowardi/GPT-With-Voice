@@ -1,6 +1,11 @@
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+
+# Download NLTK data
+nltk.download('punkt')
+nltk.download('stopwords')
+
 import speech_recognition as sr
 from gtts import gTTS
 import os
