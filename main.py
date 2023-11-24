@@ -73,3 +73,4 @@ while True:
 
     # Convert AI-generated text to speech and play it
     text_to_speech(ai_response)
+#sdf
