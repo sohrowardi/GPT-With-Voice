@@ -72,5 +72,4 @@ while True:
     ai_response = generate_text(processed_input)
 
     # Convert AI-generated text to speech and play it
-    text_to_speech(ai_response)
-#sdf
+    text_to_speech(ai_response)                                                                                                                                                                                          
